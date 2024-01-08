@@ -12,7 +12,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  /// 뒤로가기 Button
+  /// 뒤로가기 App 종료 (Android 한정)
   BackHandlerButton? backHandlerButton;
 
   @override
