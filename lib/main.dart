@@ -3,11 +3,11 @@ import 'package:idea_note5/features/main_screen/main_screen.dart';
 import 'package:idea_note5/features/splash_screen/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const NoteApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class NoteApp extends StatelessWidget {
+  const NoteApp({super.key});
 
   @override
   Widget build(BuildContext context) {

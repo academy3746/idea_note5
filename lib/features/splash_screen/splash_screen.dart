@@ -6,7 +6,7 @@ import 'package:idea_note5/features/main_screen/main_screen.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
-  static const String routeName = "/splash";
+  static const String routeName = "/";
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -17,8 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 3), () async {
-      await Navigator.pushNamed(context, MainScreen.routeName);
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, MainScreen.routeName);
     });
   }
 
