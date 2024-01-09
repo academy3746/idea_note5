@@ -6,7 +6,7 @@ import 'package:idea_note5/features/main_screen/main_screen.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
-  static const String routeName = "/";
+  static const String routeName = '/';
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -34,13 +34,13 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                "assets/images/splash.png",
+                'assets/images/splash.png',
                 width: Sizes.size150 + Sizes.size30,
                 height: Sizes.size150 + Sizes.size30,
               ),
               Gaps.v32,
               const Text(
-                "IDEA NOTE",
+                'IDEA NOTE',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: Sizes.size36,

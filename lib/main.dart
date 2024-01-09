@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:idea_note5/features/main_screen/main_screen.dart';
 import 'package:idea_note5/features/splash_screen/splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const NoteApp());
 }
 

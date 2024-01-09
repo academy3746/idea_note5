@@ -16,7 +16,7 @@ class BackHandlerButton {
       lastPressed = now;
 
       Fluttertoast.showToast(
-        msg: "'뒤로' 버튼을 한번 더 누르면 앱이 종료됩니다.",
+        msg: '\'뒤로\' 버튼을 한번 더 누르면 앱이 종료됩니다.',
         gravity: ToastGravity.BOTTOM,
         toastLength: Toast.LENGTH_SHORT,
       );
