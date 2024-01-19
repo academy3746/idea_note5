@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:idea_note5/common/constants/sizes.dart';
+import 'package:idea_note5/common/widgets/score_indicator.dart';
 
 class ItemList extends StatelessWidget {
   const ItemList({
@@ -69,25 +68,9 @@ class ItemList extends StatelessWidget {
               left: Sizes.size16,
               bottom: Sizes.size8,
             ),
-            child: Align(
+            child: const Align(
               alignment: Alignment.bottomLeft,
-              child: RatingBar.builder(
-                ignoreGestures: true,
-                updateOnDrag: false,
-                initialRating: 3,
-                minRating: 1,
-                direction: Axis.horizontal,
-                itemSize: Sizes.size16,
-                itemCount: 5,
-                itemPadding: const EdgeInsets.symmetric(horizontal: 0),
-                itemBuilder: (context, index) {
-                  return FaIcon(
-                    FontAwesomeIcons.star,
-                    color: Theme.of(context).primaryColor,
-                  );
-                },
-                onRatingUpdate: (double value) {},
-              ),
+              child: ImportanceScore(),
             ),
           ),
         ],
