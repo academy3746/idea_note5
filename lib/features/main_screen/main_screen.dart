@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:idea_note5/common/constants/sizes.dart';
 import 'package:idea_note5/common/widgets/back_handler_button.dart';
-import 'package:idea_note5/common/widgets/item_list.dart';
+import 'package:idea_note5/features/main_screen/widgets/item_list.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
