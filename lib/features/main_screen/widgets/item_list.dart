@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:idea_note5/common/constants/sizes.dart';
-import 'package:idea_note5/features/main_screen/widgets/score_indicator.dart';
+import 'package:idea_note5/common/widgets/score_indicator.dart';
 
 class ItemList extends StatelessWidget {
   const ItemList({
