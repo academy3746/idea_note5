@@ -1,6 +1,8 @@
 // ignore_for_file: deprecated_member_use, avoid_print
 import 'package:flutter/material.dart';
+import 'package:idea_note5/common/constants/sizes.dart';
 import 'package:idea_note5/common/widgets/back_handler_button.dart';
+import 'package:idea_note5/common/widgets/item_list.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -57,9 +59,33 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
+          title: const Text(
+            'IDEA NOTE',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: Sizes.size32,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
-        body: const Center(
-          child: Text('DEMO APP'),
+        body: Container(
+          margin: const EdgeInsets.all(Sizes.size20),
+          child: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return ItemList(index: index);
+            },
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
+          onPressed: () {},
+          child: Image.asset(
+            'assets/images/post.png',
+            width: Sizes.size32,
+            height: Sizes.size32,
+            color: Colors.white,
+          ),
         ),
       ),
     );

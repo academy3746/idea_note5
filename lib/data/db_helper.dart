@@ -7,7 +7,7 @@ class DatabaseHelper {
 
   /// Initialize Database: Open DB Channel
   Future<void> initDatabase() async {
-    String path = join(await getDatabasesPath(), 'idea_note.db');
+    var path = join(await getDatabasesPath(), 'idea_note.db');
 
     database = await openDatabase(
       path,
