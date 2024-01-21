@@ -29,7 +29,7 @@ class ItemList extends StatelessWidget {
       child: Stack(
         alignment: Alignment.centerLeft,
         children: [
-          /// Title
+          /// title
           Container(
             margin: const EdgeInsets.only(
               left: Sizes.size16,
@@ -44,7 +44,7 @@ class ItemList extends StatelessWidget {
             ),
           ),
 
-          /// CreatedAt
+          /// createdAt
           Container(
             margin: const EdgeInsets.only(
               right: Sizes.size16,
