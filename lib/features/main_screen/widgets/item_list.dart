@@ -17,6 +17,10 @@ class ItemList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var createdAt = DateFormat('yyyy.MM.dd HH:mm').format(
+      DateTime.fromMillisecondsSinceEpoch(ideaInfo.createdAt),
+    );
+
     return Container(
       height: Sizes.size80,
       margin: const EdgeInsets.only(
@@ -58,9 +62,7 @@ class ItemList extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                DateFormat('yyyy.MM.dd HH:mm').format(
-                  DateTime.fromMillisecondsSinceEpoch(ideaInfo.createdAt),
-                ),
+                createdAt,
                 style: TextStyle(
                   fontSize: Sizes.size10,
                   color: Colors.grey.shade500,
