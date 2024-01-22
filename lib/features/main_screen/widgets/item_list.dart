@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:idea_note5/common/constants/sizes.dart';
 import 'package:idea_note5/common/widgets/score_indicator.dart';
+import 'package:idea_note5/data/idea_info.dart';
+import 'package:intl/intl.dart';
 
 class ItemList extends StatelessWidget {
   const ItemList({
     super.key,
     required this.index,
+    required this.ideaInfo,
   });
 
   final int index;
+
+  final IdeaInfo ideaInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +40,9 @@ class ItemList extends StatelessWidget {
               left: Sizes.size16,
               bottom: Sizes.size16,
             ),
-            child: const Text(
-              '# 해병 짜장을 만들어 보아요!',
-              style: TextStyle(
+            child: Text(
+              '# ${ideaInfo.title}',
+              style: const TextStyle(
                 fontSize: Sizes.size16,
                 color: Colors.black,
               ),
@@ -53,7 +58,9 @@ class ItemList extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                '2024.01.19 14:00:00',
+                DateFormat('yyyy.MM.dd HH:mm').format(
+                  DateTime.fromMillisecondsSinceEpoch(ideaInfo.createdAt),
+                ),
                 style: TextStyle(
                   fontSize: Sizes.size10,
                   color: Colors.grey.shade500,
@@ -68,9 +75,9 @@ class ItemList extends StatelessWidget {
               left: Sizes.size16,
               bottom: Sizes.size8,
             ),
-            child: const Align(
+            child: Align(
               alignment: Alignment.bottomLeft,
-              child: ImportanceScore(),
+              child: ImportanceScore(ideaInfo: ideaInfo),
             ),
           ),
         ],

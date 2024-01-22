@@ -26,7 +26,7 @@ class IdeaInfo {
     required this.motive,
     required this.content,
     required this.importance,
-    this.feedback,
+    required this.feedback,
     required this.createdAt,
   });
 

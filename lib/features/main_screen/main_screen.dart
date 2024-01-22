@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:idea_note5/common/constants/sizes.dart';
 import 'package:idea_note5/common/widgets/back_handler_button.dart';
+import 'package:idea_note5/data/db_helper.dart';
+import 'package:idea_note5/data/idea_info.dart';
 import 'package:idea_note5/features/main_screen/widgets/item_list.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,6 +19,12 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   /// 뒤로가기 App 종료 (Android 한정)
   BackHandlerButton? backHandlerButton;
 
+  /// DB 객체 배열 형태로 초기화
+  List<IdeaInfo> lstIdeaInfo = [];
+
+  /// Database CRUD 기능 수행
+  DatabaseHelper dbHelper = DatabaseHelper();
+
   @override
   void initState() {
     super.initState();
@@ -24,6 +32,38 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
 
     backHandlerButton = BackHandlerButton(context: context);
+
+    //insertDummyData();
+    _getIdeaInfo();
+  }
+
+  /// Only For Debugging
+  Future<void> insertDummyData() async {
+    var now = DateTime.now().millisecondsSinceEpoch;
+
+    var dummyInfo = IdeaInfo(
+      title: '맛있는 해병 짜장을 만들어 볼까요?',
+      motive: '해병 짜장이 너무 좋아!',
+      content: '기열찐빠들이나 할만한 발상이군!',
+      importance: 4,
+      feedback: '야, 이 똥게이 새끼들아!',
+      createdAt: now,
+    );
+
+    await dbHelper.initDatabase();
+
+    await dbHelper.insertIdeaInfo(dummyInfo);
+  }
+
+  /// SELECT * FROM `tb_idea` WHERE (1) ORDER BY createdAt DESC
+  Future<void> _getIdeaInfo() async {
+    await dbHelper.initDatabase();
+
+    lstIdeaInfo = await dbHelper.selectIdeaInfo();
+
+    lstIdeaInfo.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+    setState(() {});
   }
 
   @override
@@ -71,9 +111,12 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         body: Container(
           margin: const EdgeInsets.all(Sizes.size20),
           child: ListView.builder(
-            itemCount: 10,
+            itemCount: lstIdeaInfo.length,
             itemBuilder: (context, index) {
-              return ItemList(index: index);
+              return ItemList(
+                index: index,
+                ideaInfo: lstIdeaInfo[index],
+              );
             },
           ),
         ),
