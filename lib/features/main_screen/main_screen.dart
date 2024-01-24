@@ -4,6 +4,7 @@ import 'package:idea_note5/common/constants/sizes.dart';
 import 'package:idea_note5/common/widgets/back_handler_button.dart';
 import 'package:idea_note5/data/db_helper.dart';
 import 'package:idea_note5/data/idea_info.dart';
+import 'package:idea_note5/features/edit_screen/edit_screen.dart';
 import 'package:idea_note5/features/main_screen/widgets/item_list.dart';
 
 class MainScreen extends StatefulWidget {
@@ -122,7 +123,12 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(
+              context,
+              EditScreen.routeName,
+            );
+          },
           child: Image.asset(
             'assets/images/post.png',
             width: Sizes.size32,
