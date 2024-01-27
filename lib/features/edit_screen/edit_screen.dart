@@ -19,13 +19,13 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
-  /// 입력필드
+  /// 입력필드 Controller
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _motiveController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
   final TextEditingController _feedbackController = TextEditingController();
 
-  /// 키보드 비활성화
+  /// Soft Keyboard 비활성화
   void _keyboardUnfocus() {
     FocusScope.of(context).unfocus();
   }
