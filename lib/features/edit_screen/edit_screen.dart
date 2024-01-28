@@ -14,7 +14,7 @@ class EditScreen extends StatefulWidget {
     this.ideaInfo,
   });
 
-  static const String routeName = "/edit";
+  static const String routeName = '/edit';
 
   final IdeaInfo? ideaInfo;
 
