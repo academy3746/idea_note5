@@ -87,6 +87,8 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    var bgColor = Theme.of(context).primaryColor.withOpacity(0.7);
+
     return WillPopScope(
       onWillPop: () async {
         if (backHandlerButton != null) {
@@ -122,7 +124,7 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).primaryColor.withOpacity(0.7),
+          backgroundColor: bgColor,
           onPressed: () {
             Navigator.pushNamed(
               context,
