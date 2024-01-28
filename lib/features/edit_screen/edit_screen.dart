@@ -263,7 +263,9 @@ class _EditScreenState extends State<EditScreen> {
                       Navigator.pop(context);
                     }
                   },
-                  child: const ConfirmButton(btnText: '작성완료'),
+                  child: ConfirmButton(
+                    btnText: widget.ideaInfo == null ? '작성완료' : '수정완료',
+                  ),
                 ),
               ],
             ),
