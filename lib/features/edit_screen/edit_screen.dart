@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:idea_note5/common/constants/gaps.dart';
 import 'package:idea_note5/common/constants/sizes.dart';
 import 'package:idea_note5/data/idea_info.dart';
+import 'package:idea_note5/features/edit_screen/widgets/score_selector.dart';
 import 'package:idea_note5/features/edit_screen/widgets/text_field_controller.dart';
 
 class EditScreen extends StatefulWidget {
@@ -24,6 +25,25 @@ class _EditScreenState extends State<EditScreen> {
   final TextEditingController _motiveController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
   final TextEditingController _feedbackController = TextEditingController();
+
+  /// 아이디어 중요도 점수 Bool 초기화
+  bool clicked01 = false;
+  bool clicked02 = false;
+  bool clicked03 = true;
+  bool clicked04 = false;
+  bool clicked05 = false;
+
+  /// 아이디어 중요도 점수 Integer 초기화
+  int score = 3;
+
+  /// 아이디어 중요도 점수 Bool 초기화
+  void _initClickedStatus() {
+    clicked01 = false;
+    clicked02 = false;
+    clicked03 = false;
+    clicked04 = false;
+    clicked05 = false;
+  }
 
   /// Soft Keyboard 비활성화
   void _keyboardUnfocus() {
@@ -58,9 +78,8 @@ class _EditScreenState extends State<EditScreen> {
       body: GestureDetector(
         onTap: _keyboardUnfocus,
         child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           scrollDirection: Axis.vertical,
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Container(
             margin: const EdgeInsets.all(Sizes.size20),
             child: Column(
@@ -104,7 +123,81 @@ class _EditScreenState extends State<EditScreen> {
 
                 /// importance
                 const Text('아이디어 중요도 점수'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        _initClickedStatus();
 
+                        setState(() {
+                          score = 1;
+                          clicked01 = true;
+                        });
+                      },
+                      child: ScoreSelector(
+                        score: 1,
+                        clicked: clicked01,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _initClickedStatus();
+
+                        setState(() {
+                          score = 2;
+                          clicked02 = true;
+                        });
+                      },
+                      child: ScoreSelector(
+                        score: 2,
+                        clicked: clicked02,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _initClickedStatus();
+
+                        setState(() {
+                          score = 3;
+                          clicked03 = true;
+                        });
+                      },
+                      child: ScoreSelector(
+                        score: 3,
+                        clicked: clicked03,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _initClickedStatus();
+
+                        setState(() {
+                          score = 4;
+                          clicked04 = true;
+                        });
+                      },
+                      child: ScoreSelector(
+                        score: 4,
+                        clicked: clicked04,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        _initClickedStatus();
+
+                        setState(() {
+                          score = 5;
+                          clicked05 = true;
+                        });
+                      },
+                      child: ScoreSelector(
+                        score: 5,
+                        clicked: clicked05,
+                      ),
+                    ),
+                  ],
+                ),
                 Gaps.v16,
 
                 /// feedback
