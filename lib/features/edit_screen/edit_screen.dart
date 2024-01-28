@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:idea_note5/common/constants/gaps.dart';
 import 'package:idea_note5/common/constants/sizes.dart';
+import 'package:idea_note5/common/widgets/app_snackbar.dart';
+import 'package:idea_note5/common/widgets/confirm_button.dart';
+import 'package:idea_note5/data/db_helper.dart';
 import 'package:idea_note5/data/idea_info.dart';
 import 'package:idea_note5/features/edit_screen/widgets/score_selector.dart';
 import 'package:idea_note5/features/edit_screen/widgets/text_field_controller.dart';
@@ -20,6 +23,9 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
+  /// Initialize Database Helper Instance
+  final dbHelper = DatabaseHelper();
+
   /// 입력필드 Controller
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _motiveController = TextEditingController();
@@ -50,8 +56,17 @@ class _EditScreenState extends State<EditScreen> {
     FocusScope.of(context).unfocus();
   }
 
+  /// INSERT Database
+  Future<void> _insertIdeaInfo(IdeaInfo data) async {
+    await dbHelper.initDatabase();
+
+    await dbHelper.insertIdeaInfo(data);
+  }
+
   @override
   Widget build(BuildContext context) {
+    var snackBar = AppSnackbar(context: context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -211,6 +226,45 @@ class _EditScreenState extends State<EditScreen> {
                   maxLength: 500,
                 ),
                 Gaps.v16,
+
+                /// 작성완료 Button
+                GestureDetector(
+                  onTap: () async {
+                    var titleValue = _titleController.text.toString();
+                    var motiveValue = _motiveController.text.toString();
+                    var contentValue = _contentController.text.toString();
+                    var feedbackValue = _feedbackController.text.toString();
+
+                    /// Validation
+                    if (titleValue.isEmpty ||
+                        motiveValue.isEmpty ||
+                        contentValue.isEmpty) {
+                      snackBar.showSnackbar(context);
+
+                      return;
+                    }
+
+                    /// DB CREATE
+                    if (widget.ideaInfo == null) {
+                      var now = DateTime.now().millisecondsSinceEpoch;
+
+                      var data = IdeaInfo(
+                        title: titleValue,
+                        motive: motiveValue,
+                        content: contentValue,
+                        importance: score,
+                        feedback: feedbackValue.isNotEmpty ? feedbackValue : '',
+                        createdAt: now,
+                      );
+
+                      await _insertIdeaInfo(data);
+
+                      if (!mounted) return;
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: const ConfirmButton(btnText: '작성완료'),
+                ),
               ],
             ),
           ),
