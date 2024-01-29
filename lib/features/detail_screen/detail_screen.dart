@@ -19,6 +19,7 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  /// Initialize Database Helper Instance
   final _dbHelper = DatabaseHelper();
 
   @override
