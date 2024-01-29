@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:idea_note5/data/idea_info.dart';
+import 'package:idea_note5/features/detail_screen/detail_screen.dart';
 import 'package:idea_note5/features/edit_screen/edit_screen.dart';
 import 'package:idea_note5/features/main_screen/main_screen.dart';
 import 'package:idea_note5/features/splash_screen/splash_screen.dart';
@@ -36,6 +37,14 @@ class NoteApp extends StatelessWidget {
           return MaterialPageRoute(
             builder: (BuildContext context) {
               return EditScreen(ideaInfo: ideaInfo);
+            },
+          );
+        } else if (settings.name == DetailScreen.routeName) {
+          final IdeaInfo? ideaInfo = settings.arguments as IdeaInfo?;
+
+          return MaterialPageRoute(
+            builder: (BuildContext context) {
+              return DetailScreen(ideaInfo: ideaInfo);
             },
           );
         }

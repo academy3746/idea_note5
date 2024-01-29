@@ -4,6 +4,7 @@ import 'package:idea_note5/common/constants/sizes.dart';
 import 'package:idea_note5/common/widgets/back_handler_button.dart';
 import 'package:idea_note5/data/db_helper.dart';
 import 'package:idea_note5/data/idea_info.dart';
+import 'package:idea_note5/features/detail_screen/detail_screen.dart';
 import 'package:idea_note5/features/edit_screen/edit_screen.dart';
 import 'package:idea_note5/features/main_screen/widgets/item_list.dart';
 
@@ -116,9 +117,18 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
           child: ListView.builder(
             itemCount: lstIdeaInfo.length,
             itemBuilder: (context, index) {
-              return ItemList(
-                index: index,
-                ideaInfo: lstIdeaInfo[index],
+              return GestureDetector(
+                onTap: () async {
+                  await Navigator.pushNamed(
+                    context,
+                    DetailScreen.routeName,
+                    arguments: lstIdeaInfo[index],
+                  );
+                },
+                child: ItemList(
+                  index: index,
+                  ideaInfo: lstIdeaInfo[index],
+                ),
               );
             },
           ),
