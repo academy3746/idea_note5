@@ -79,7 +79,10 @@ class ItemList extends StatelessWidget {
             ),
             child: Align(
               alignment: Alignment.bottomLeft,
-              child: ImportanceScore(ideaInfo: ideaInfo),
+              child: ImportanceScore(
+                ideaInfo: ideaInfo,
+                itemSize: Sizes.size16,
+              ),
             ),
           ),
         ],
