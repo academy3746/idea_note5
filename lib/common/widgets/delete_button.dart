@@ -30,7 +30,7 @@ class DeleteButton extends StatelessWidget {
           builder: (context) {
             return AlertDialog(
               title: const Text('정말 삭제 하시겠어요?'),
-              content: const Text('해당 게시물은 다시 복구할 수 없습니다.'),
+              content: const Text('삭제된 게시물은 다시 복구할 수 없습니다.'),
               actions: [
                 TextButton(
                   onPressed: () {
