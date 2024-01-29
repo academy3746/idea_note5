@@ -160,7 +160,6 @@ class _DetailScreenState extends State<DetailScreen> {
                         fontSize: Sizes.size14,
                       ),
                     ),
-                    Gaps.v16,
                   ],
                 ),
               ),
