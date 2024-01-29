@@ -5,15 +5,19 @@ class ConfirmButton extends StatelessWidget {
   const ConfirmButton({
     super.key,
     required this.btnText,
+    this.margin,
   });
 
   final String btnText;
+
+  final EdgeInsetsGeometry? margin;
 
   @override
   Widget build(BuildContext context) {
     var themeColor = Theme.of(context).primaryColor;
 
     return Container(
+      margin: margin,
       decoration: ShapeDecoration(
         color: themeColor,
         shape: OutlineInputBorder(
