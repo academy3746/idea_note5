@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:idea_note5/common/constants/sizes.dart';
+import 'package:idea_note5/common/widgets/delete_button.dart';
+import 'package:idea_note5/data/db_helper.dart';
 import 'package:idea_note5/data/idea_info.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   const DetailScreen({
     super.key,
     this.ideaInfo,
@@ -11,6 +13,13 @@ class DetailScreen extends StatelessWidget {
   static const String routeName = '/detail';
 
   final IdeaInfo? ideaInfo;
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  final _dbHelper = DatabaseHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +39,18 @@ class DetailScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          ideaInfo!.title,
+          widget.ideaInfo!.title,
           style: const TextStyle(
-            fontSize: Sizes.size18,
+            fontSize: Sizes.size16,
             color: Colors.black,
           ),
         ),
+        actions: [
+          DeleteButton(
+            ideaInfo: widget.ideaInfo,
+            dbHelper: _dbHelper,
+          ),
+        ],
       ),
       body: Container(),
     );

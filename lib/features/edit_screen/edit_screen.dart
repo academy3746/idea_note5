@@ -65,7 +65,10 @@ class _EditScreenState extends State<EditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var snackBar = AppSnackbar(context: context);
+    var snackBar = AppSnackbar(
+      context: context,
+      msg: '비어있는 내용을 작성해 주세요!',
+    );
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -76,7 +79,7 @@ class _EditScreenState extends State<EditScreen> {
           '새 아이디어 작성하기',
           style: TextStyle(
             color: Colors.black,
-            fontSize: Sizes.size18,
+            fontSize: Sizes.size16,
           ),
         ),
         leading: GestureDetector(
