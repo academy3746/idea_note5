@@ -14,6 +14,13 @@ class DeleteButton extends StatelessWidget {
 
   final DatabaseHelper dbHelper;
 
+  /// 게시물 삭제
+  Future<void> _deleteIdeaInfo(int id) async {
+    await dbHelper.initDatabase();
+
+    await dbHelper.deleteIdeaInfo(id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -35,7 +42,10 @@ class DeleteButton extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    await _deleteIdeaInfo(ideaInfo!.id!);
+
+                    if (!context.mounted) return;
                     Navigator.of(context).pop();
                     Navigator.pop(context);
                   },
