@@ -42,6 +42,48 @@ class _EditScreenState extends State<EditScreen> {
   /// 아이디어 중요도 점수 Integer 초기화
   int score = 3;
 
+  @override
+  void initState() {
+    super.initState();
+
+    /// 기존 데이터 자동 기입 처리
+    if (widget.ideaInfo != null) {
+      _titleController.text = widget.ideaInfo!.title;
+      _motiveController.text = widget.ideaInfo!.motive;
+      _contentController.text = widget.ideaInfo!.content;
+
+      if (widget.ideaInfo!.feedback!.isNotEmpty) {
+        _feedbackController.text = widget.ideaInfo!.feedback!;
+      }
+
+      score = widget.ideaInfo!.importance;
+
+      _initClickedStatus();
+
+      switch (widget.ideaInfo!.importance) {
+        case 1:
+          clicked01 = true;
+          break;
+
+        case 2:
+          clicked02 = true;
+          break;
+
+        case 3:
+          clicked03 = true;
+          break;
+
+        case 4:
+          clicked04 = true;
+          break;
+
+        case 5:
+          clicked05 = true;
+          break;
+      }
+    }
+  }
+
   /// 아이디어 중요도 점수 Bool 초기화
   void _initClickedStatus() {
     clicked01 = false;
@@ -75,9 +117,9 @@ class _EditScreenState extends State<EditScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text(
-          '새 아이디어 작성하기',
-          style: TextStyle(
+        title: Text(
+          widget.ideaInfo == null ? '새 아이디어 작성하기' : '아이디어 수정하기',
+          style: const TextStyle(
             color: Colors.black,
             fontSize: Sizes.size16,
           ),

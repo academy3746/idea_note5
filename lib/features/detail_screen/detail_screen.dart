@@ -6,6 +6,7 @@ import 'package:idea_note5/common/widgets/delete_button.dart';
 import 'package:idea_note5/common/widgets/score_indicator.dart';
 import 'package:idea_note5/data/db_helper.dart';
 import 'package:idea_note5/data/idea_info.dart';
+import 'package:idea_note5/features/edit_screen/edit_screen.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({
@@ -168,7 +169,13 @@ class _DetailScreenState extends State<DetailScreen> {
 
           /// IdeaInfo UPDATE
           GestureDetector(
-            onTap: () {},
+            onTap: () async {
+              await Navigator.pushNamed(
+                context,
+                EditScreen.routeName,
+                arguments: widget.ideaInfo,
+              );
+            },
             child: const ConfirmButton(
               margin: EdgeInsets.all(Sizes.size20),
               btnText: '수정하기',
