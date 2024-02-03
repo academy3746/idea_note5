@@ -105,13 +105,15 @@ class _EditScreenState extends State<EditScreen> {
     await dbHelper.insertIdeaInfo(data);
   }
 
+  /// UPDATE Database
+  Future<void> _updateIdeaInfo(IdeaInfo data) async {
+    await dbHelper.initDatabase();
+
+    await dbHelper.updateIdeaInfo(data);
+  }
+
   @override
   Widget build(BuildContext context) {
-    var snackBar = AppSnackbar(
-      context: context,
-      msg: '비어있는 내용을 작성해 주세요!',
-    );
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -284,6 +286,11 @@ class _EditScreenState extends State<EditScreen> {
                     if (titleValue.isEmpty ||
                         motiveValue.isEmpty ||
                         contentValue.isEmpty) {
+                      var snackBar = AppSnackbar(
+                        context: context,
+                        msg: '비어있는 내용을 작성해 주세요!',
+                      );
+
                       snackBar.showSnackbar(context);
 
                       return;
@@ -305,7 +312,22 @@ class _EditScreenState extends State<EditScreen> {
                       await _insertIdeaInfo(data);
 
                       if (!mounted) return;
-                      Navigator.pop(context);
+                      Navigator.pop(context, 'insert');
+                    } else {
+                      /// DB UPDATE
+                      var data = widget.ideaInfo;
+
+                      data?.title = titleValue;
+                      data?.motive = motiveValue;
+                      data?.content = contentValue;
+                      data?.importance = score;
+                      data?.feedback =
+                          feedbackValue.isNotEmpty ? feedbackValue : '';
+
+                      await _updateIdeaInfo(data!);
+
+                      if (!mounted) return;
+                      Navigator.pop(context, 'update');
                     }
                   },
                   child: ConfirmButton(

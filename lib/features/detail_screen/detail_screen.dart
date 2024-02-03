@@ -35,7 +35,7 @@ class _DetailScreenState extends State<DetailScreen> {
         backgroundColor: Colors.white,
         leading: GestureDetector(
           onTap: () {
-            Navigator.pop(context);
+            Navigator.of(context).pop();
           },
           child: const Icon(
             Icons.arrow_back_ios_new,
@@ -170,11 +170,16 @@ class _DetailScreenState extends State<DetailScreen> {
           /// IdeaInfo UPDATE
           GestureDetector(
             onTap: () async {
-              await Navigator.pushNamed(
+              var res = await Navigator.pushNamed(
                 context,
                 EditScreen.routeName,
                 arguments: widget.ideaInfo,
               );
+
+              if (res != null) {
+                if (!mounted) return;
+                Navigator.pop(context, 'update');
+              }
             },
             child: const ConfirmButton(
               margin: EdgeInsets.all(Sizes.size20),

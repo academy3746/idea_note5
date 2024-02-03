@@ -47,7 +47,7 @@ class DeleteButton extends StatelessWidget {
 
                     if (!context.mounted) return;
                     Navigator.of(context).pop();
-                    Navigator.pop(context);
+                    Navigator.pop(context, 'delete');
                   },
                   child: const Text(
                     '확인',

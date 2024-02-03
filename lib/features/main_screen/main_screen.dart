@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use, avoid_print
 import 'package:flutter/material.dart';
 import 'package:idea_note5/common/constants/sizes.dart';
+import 'package:idea_note5/common/widgets/app_snackbar.dart';
 import 'package:idea_note5/common/widgets/back_handler_button.dart';
 import 'package:idea_note5/data/db_helper.dart';
 import 'package:idea_note5/data/idea_info.dart';
@@ -119,11 +120,33 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () async {
-                  await Navigator.pushNamed(
+                  var res = await Navigator.pushNamed(
                     context,
                     DetailScreen.routeName,
                     arguments: lstIdeaInfo[index],
                   );
+
+                  if (res != null) {
+                    if (res == 'update') {
+                      if (!mounted) return;
+                      var snackBar = AppSnackbar(
+                        context: context,
+                        msg: '기존 아이디어가 수정되었습니다!',
+                      );
+
+                      snackBar.showSnackbar(context);
+                    } else if (res == 'delete') {
+                      if (!mounted) return;
+                      var snackBar = AppSnackbar(
+                        context: context,
+                        msg: '기존 아이디어가 삭제되었습니다!',
+                      );
+
+                      snackBar.showSnackbar(context);
+                    }
+
+                    await _getIdeaInfo();
+                  }
                 },
                 child: ItemList(
                   index: index,
@@ -135,11 +158,23 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: bgColor,
-          onPressed: () {
-            Navigator.pushNamed(
+          onPressed: () async {
+            var res = await Navigator.pushNamed(
               context,
               EditScreen.routeName,
             );
+
+            if (res != null) {
+              await _getIdeaInfo();
+
+              if (!mounted) return;
+              var snackBar = AppSnackbar(
+                context: context,
+                msg: '새 아이디어 작성이 완료되었습니다!',
+              );
+
+              snackBar.showSnackbar(context);
+            }
           },
           child: Image.asset(
             'assets/images/post.png',
